@@ -20,7 +20,7 @@ score_win = 10
 
 class paddle:
     color = white
-    vel = 4
+    vel = 6
     
     def __init__(self, x, y, width, height):
         self.x = self.origin_x = x
