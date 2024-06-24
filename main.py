@@ -1,20 +1,29 @@
-from objects import *
+import pygame
+from objects import game
 
 def main():
     run = True
     clock = pygame.time.Clock()
     
-    left_paddle = paddle(10, height//2 - paddle_height//2, paddle_width, paddle_height)
-    right_paddle = paddle(width - 10 - paddle_width, height//2 - paddle_height//2, paddle_width, paddle_height)
+    width, height =  700, 500
+
+    WIN = pygame.display.set_mode((width, height))
+    pygame.display.set_caption("Pong")
     
-    b = ball(width//2, height//2, ball_rad)
+    black = (0,0,0)
+    white=(255,255,255)
     
     l_score = 0
     r_score = 0
     
+    score_font = pygame.font.SysFont("PixelifySans-Regular", 50)
+    score_win = 10
+    
+    g = game(WIN, width, height)
+        
     while run:
-        clock.tick(FPS)
-        draw(WIN, [left_paddle, right_paddle], b, l_score, r_score)
+        clock.tick(60)
+        g.draw(WIN, [g.left_paddle, g.right_paddle], g.ball, l_score, r_score)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -37,15 +46,15 @@ def main():
             pygame.display.update()
             pygame.time.delay(5000)
             b.reset()
-            left_paddle.reset()
-            right_paddle.reset()
+            g.left_paddle.reset()
+            g.right_paddle.reset()
             l_score = 0 
             r_score = 0
         
         keys = pygame.key.get_pressed()
-        handle_paddle_movement(keys, left_paddle, right_paddle)
+        g.handle_paddle_movement(keys, g.left_paddle, g.right_paddle)
         b.move()
-        handle_collision(b, left_paddle, right_paddle)
+        g.handle_collision(b, g.g.left_paddle, g.right_paddle)
         
         if b.x < 0:
             r_score += 1
@@ -54,7 +63,4 @@ def main():
             l_score += 1
             b.reset()
         
-    pygame.quit()
-    
-if __name__ == '__main__':      #this makes it so the main function only runs when called, ie not when it is imported, I suppose it checks the file name to ensure it is main
-    main()
+    pygame.quit()  
