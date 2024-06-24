@@ -5,16 +5,10 @@ pygame.init()
 
 
 class game:
+    score_font = pygame.font.SysFont("PixelifySans-Regular", 50)
     def __init__(self, window, window_width, window_height):
         self.window_width = window_width
         self.window_height = window_height
-
-        self.left_paddle = paddle(
-            10, self.window_height // 2 - paddle.HEIGHT // 2)
-        self.right_paddle = paddle(
-            self.window_width - 10 - paddle.WIDTH, self.window_height // 2 - paddle.HEIGHT//2)
-        self.ball = ball(self.window_width // 2, self.window_height // 2)
-
         self.window = window
 
     def handle_paddle_movement(self, keys, left_paddle, right_paddle):
@@ -61,8 +55,8 @@ class game:
         for paddle in paddles:
             paddle.draw(window)
         
-        left_score_txt = self.score_font.render(f"{self.left_score}", 1, (255, 255, 255))
-        right_score_txt = self.score_font.render(f"{self.right_score}", 1, (255, 255, 255))
+        left_score_txt = self.score_font.render(f"{left_score}", 1, (255, 255, 255))
+        right_score_txt = self.score_font.render(f"{right_score}", 1, (255, 255, 255))
         
         window.blit(left_score_txt, (self.window_width // 4 - left_score_txt.get_width() // 2, 20))
         window.blit(right_score_txt, (self.window_width * (3 / 4) - right_score_txt.get_width() // 2, 20))
