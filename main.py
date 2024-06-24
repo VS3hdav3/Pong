@@ -1,4 +1,3 @@
-import pygame
 from objects import *
 
 def main():
