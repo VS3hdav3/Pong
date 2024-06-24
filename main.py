@@ -20,18 +20,6 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
                 break
-
-        keys = pygame.key.get_pressed()
-        handle_paddle_movement(keys, left_paddle, right_paddle)
-        b.move()
-        handle_collision(b, left_paddle, right_paddle)
-        
-        if b.x < 0:
-            r_score += 1
-            b.reset()
-        elif b.x > width:
-            l_score += 1
-            b.reset()
         
         won = False
         if l_score >= score_win:
@@ -54,6 +42,18 @@ def main():
             right_paddle.reset()
             l_score = 0 
             r_score = 0
+        
+        keys = pygame.key.get_pressed()
+        handle_paddle_movement(keys, left_paddle, right_paddle)
+        b.move()
+        handle_collision(b, left_paddle, right_paddle)
+        
+        if b.x < 0:
+            r_score += 1
+            b.reset()
+        elif b.x > width:
+            l_score += 1
+            b.reset()
         
     pygame.quit()
     
