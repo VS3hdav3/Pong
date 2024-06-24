@@ -11,7 +11,7 @@ def main():
     pygame.display.set_caption("Pong")
     
     black = (0,0,0)
-    white=(255,255,255)
+    white = (255,255,255)
     
     l_score = 0
     r_score = 0
@@ -20,10 +20,13 @@ def main():
     score_win = 10
     
     g = game(WIN, width, height)
+    b = g.ball
+    l_paddle = g.left_paddle
+    r_paddle = g.right_paddle
         
     while run:
         clock.tick(60)
-        g.draw(WIN, [g.left_paddle, g.right_paddle], g.ball, l_score, r_score)
+        g.draw(g.window, [l_paddle, r_paddle], b, l_score, r_score)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -41,20 +44,20 @@ def main():
             text = score_font.render(won_txt, 1, white)
             x = width//2 - text.get_width()//2
             y = height//2 - text.get_height()//2
-            pygame.draw.rect(WIN, black, (x - 10, y - 10, text.get_width() + 20, text.get_height() + 20))
-            WIN.blit(text, (x, y))
+            pygame.draw.rect(g.window, black, (x - 10, y - 10, text.get_width() + 20, text.get_height() + 20))
+            g.window.blit(text, (x, y))
             pygame.display.update()
             pygame.time.delay(5000)
             b.reset()
-            g.left_paddle.reset()
-            g.right_paddle.reset()
+            l_paddle.reset()
+            r_paddle.reset()
             l_score = 0 
             r_score = 0
         
         keys = pygame.key.get_pressed()
-        g.handle_paddle_movement(keys, g.left_paddle, g.right_paddle)
+        g.handle_paddle_movement(keys, l_paddle, r_paddle)
         b.move()
-        g.handle_collision(b, g.g.left_paddle, g.right_paddle)
+        g.handle_collision(b, l_paddle, r_paddle)
         
         if b.x < 0:
             r_score += 1
