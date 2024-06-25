@@ -23,4 +23,7 @@ class Ball:
         self.x = self.origin_x
         self.y = self.origin_y
         self.y_vel = 0
-        self.x_vel *= -1
+        if self.x_vel < 0:
+            self.x_vel = self.max_vel
+        elif self.x_vel > 0:
+            self.x_vel = -1 * self.max_vel

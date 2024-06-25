@@ -17,6 +17,8 @@ def main():
     l_score = 0
     r_score = 0
     
+    paddle_vel = 0
+    
     score_font = pygame.font.SysFont("PixelifySans-Regular", 50)
     score_win = 10
     
@@ -24,9 +26,9 @@ def main():
     pygame.display.set_caption("Pong")
     g = game.Game(WIN, width, height)
     l_paddle = paddle.Paddle(
-            10, height // 2 - paddle.Paddle.height // 2)
+            10, height // 2 - paddle.Paddle.height // 2, paddle_vel)
     r_paddle = paddle.Paddle(
-            width - 10 - paddle.Paddle.width, height // 2 - paddle.Paddle.height//2)
+            width - 10 - paddle.Paddle.width, height // 2 - paddle.Paddle.height//2, paddle_vel)
     b = ball.Ball(width // 2, height // 2)
 
     while run:
