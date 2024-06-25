@@ -1,5 +1,9 @@
 import pygame
 from objects import game
+from objects import paddle
+from objects import ball
+
+
 
 def main():
     run = True
@@ -16,17 +20,17 @@ def main():
     score_font = pygame.font.SysFont("PixelifySans-Regular", 50)
     score_win = 10
     
-    l_paddle = game.paddle(
-            10, height // 2 - game.paddle.height // 2)
-    r_paddle = game.paddle(
-            width - 10 - game.paddle.width, height // 2 - game.paddle.height//2)
-    b = game.ball(width // 2, height // 2)
+    WIN = pygame.display.set_mode((width, height))
+    pygame.display.set_caption("Pong")
+    g = game.Game(WIN, width, height)
+    l_paddle = paddle.Paddle(
+            10, height // 2 - paddle.Paddle.height // 2)
+    r_paddle = paddle.Paddle(
+            width - 10 - paddle.Paddle.width, height // 2 - paddle.Paddle.height//2)
+    b = ball.Ball(width // 2, height // 2)
 
     while run:
         clock.tick(60)
-        WIN = pygame.display.set_mode((width, height))
-        pygame.display.set_caption("Pong")
-        g = game(WIN, width, height)
         g.draw(g.window, [l_paddle, r_paddle], b, l_score, r_score)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -66,5 +70,6 @@ def main():
         elif b.x > width:
             l_score += 1
             b.reset()
-        
     pygame.quit()  
+
+main()

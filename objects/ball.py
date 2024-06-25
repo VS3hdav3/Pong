@@ -1,7 +1,7 @@
 import pygame
 import random
 
-class ball:
+class Ball:
     init_vel = random.choice([-5, 5])         #+ve velocity such that in the initial game init, it goes towards the right paddle, without any y_vel
     max_vel = 5
     radius = 7

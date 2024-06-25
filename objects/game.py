@@ -1,10 +1,8 @@
-from .paddle import paddle
-from .ball import ball
 import pygame
 pygame.init()
 
 
-class game:
+class Game:
     score_font = pygame.font.SysFont("PixelifySans-Regular", 50)
     def __init__(self, window, window_width, window_height):
         self.window_width = window_width
@@ -51,7 +49,7 @@ class game:
                     ball.y_vel = -1 * y_Vel        
         
     def draw(self, window, paddles, ball, left_score, right_score):
-        window.fill(0, 0, 0)
+        window.fill([0, 0, 0])
         for paddle in paddles:
             paddle.draw(window)
         
