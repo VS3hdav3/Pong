@@ -72,4 +72,5 @@ def main():
             b.reset()
     pygame.quit()  
 
-main()
+if __name__ == '__main__':
+    main()
